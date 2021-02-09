@@ -2954,20 +2954,11 @@ public class LoginToAppmaker {
 			    x.get(0).click();
 			}
 
-			String actual_msg = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
-			String expect = "Login Successful";
-
-			if (actual_msg.contains(expect)) {
-				System.out.println("Validation passed = " + actual_msg);
-			} else {
-				System.out.println("Test Case Failed = " + actual_msg);
-			}
-
 			Thread.sleep(5000);
 			
 			driver.manage().deleteAllCookies();
 			System.out.println("All cookies Deleted");
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 
 			List<WebElement> activeColumns = driver.findElements(By.name("Created_Apps"));
 			Thread.sleep(1000);
