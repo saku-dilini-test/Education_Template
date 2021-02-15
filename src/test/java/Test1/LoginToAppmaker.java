@@ -100,7 +100,19 @@ public class LoginToAppmaker {
 		if (x.size() > 0)
 		{
 		    x.get(0).click();
-		}
+		    
+		    Thread.sleep(2000);
+		    
+		    String actual_msg = driver.findElement(By.cssSelector(".toast-message")).getAttribute("innerHTML");
+			String expect = "Login Successful";
+
+			if (actual_msg.contains(expect)) {
+				System.out.println("Validation passed = " + actual_msg);
+			} else {
+				System.out.println("Test Case Failed = " + actual_msg);
+			}
+		    
+		}else {
 
 		String actual_msg = driver.findElement(By.cssSelector(".toast-message")).getAttribute("innerHTML");
 		String expect = "Login Successful";
@@ -110,6 +122,7 @@ public class LoginToAppmaker {
 		} else {
 			System.out.println("Test Case Failed = " + actual_msg);
 		}
+	}
  
 		Thread.sleep(6000);
 		
