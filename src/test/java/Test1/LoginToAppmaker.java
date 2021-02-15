@@ -74,6 +74,7 @@ public class LoginToAppmaker {
 		
 		System.out.println("--------------------------Starting to login to CMS -------------------------------->>");
 
+		System.out.println("Test 123------------------------------------");
 		
 		driver.manage().deleteAllCookies();
 		System.out.println("All cookies Deleted");
