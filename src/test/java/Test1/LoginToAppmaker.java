@@ -24,6 +24,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+//---------------------------------Astro Template --------------------------------------------------------------
+
 public class LoginToAppmaker {
 
 	public String baseURL ="https://appmakercms.otenro.com/app/login";
@@ -2251,7 +2253,7 @@ public class LoginToAppmaker {
 		Select dropdown = new Select(driver.findElement(By.className("automation-looknfeel-select-header-font")));
 		dropdown.selectByVisibleText("Alfaslab One");
 		System.out.println("------Header Font dropdown clicked ---->>");
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
 		String actual_msg3 = driver.findElement(By.className("toast-message")).getAttribute("innerHTML");
 		String expect3 = "Header Font Successfully Updated";
@@ -2270,7 +2272,7 @@ public class LoginToAppmaker {
 		Select dropdown1 = new Select(driver.findElement(By.className("automation-looknfeel-select-header-font-weight")));
 		dropdown1.selectByVisibleText("bold");
 		System.out.println("----Header Font Weight dropdown clicked---->>");
-		Thread.sleep(4000);
+		Thread.sleep(1000);
 		
 		String actual_msg4 = driver.findElement(By.className("toast-message")).getAttribute("innerHTML");
 		String expect4 = "Header Font Weight Successfully Updated";
@@ -2315,7 +2317,7 @@ public class LoginToAppmaker {
 		Select dropdown2 = new Select(driver.findElement(By.className("automation-looknfeel-select-content-font")));
 		dropdown2.selectByVisibleText("Poppins");
 		System.out.println("----Content Font dropdown clicked---->>");
-		Thread.sleep(4000);	
+		Thread.sleep(1000);	
 
 		String actual_msg6 = driver.findElement(By.className("toast-message")).getAttribute("innerHTML");
 		String expect6 = "Content Font Successfully Updated";
@@ -2333,7 +2335,7 @@ public class LoginToAppmaker {
 		Select dropdown3 = new Select(driver.findElement(By.className("automation-looknfeel-select-content-font-weight")));
 		dropdown3.selectByVisibleText("bolder");
 		System.out.println("----Content Font Weight dropdown clicked---->>");
-		Thread.sleep(4000);
+		Thread.sleep(1000);
 
 		String actual_msg7 = driver.findElement(By.className("toast-message")).getAttribute("innerHTML");
 		String expect7 = "Content Font Weight Successfully Updated";
