@@ -28,7 +28,7 @@ import org.testng.annotations.Test;
 
 public class LoginToAppmaker {
 
-	public String baseURL ="https://appmaker.otenro.com/app/login";
+	public String baseURL ="https://appmakercms.otenro.com/app/login";
 	public String ResetPasswordURL = "https://appmaker.otenro.com/app/resetPassword/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjVkOTJmNDAwMTZlYmUyNmQ1YjhiOGVmZCIsImVtYWlsIjoic2FrdW50aGFsYW5mbUBnbWFpbC5jb20iLCJpYXQiOjE1NzAwOTIwMDB9.kr02qnxDVijmzwhnrb717czXZA7Hf99ikGgrcd3XQZg";
 	
 	public WebDriver driver;
@@ -75,8 +75,6 @@ public class LoginToAppmaker {
 		driver.get(baseURL);
 		
 		System.out.println("--------------------------Starting to login to CMS -------------------------------->>");
-
-		System.out.println("Test 123------------------------------------");
 		
 		driver.manage().deleteAllCookies();
 		System.out.println("All cookies Deleted");
@@ -2972,7 +2970,11 @@ public class LoginToAppmaker {
 			
 			driver.manage().deleteAllCookies();
 			System.out.println("All cookies Deleted");
-			Thread.sleep(10000);
+			Thread.sleep(5000);
+			
+			driver.navigate().refresh();
+			driver.navigate().refresh();
+			Thread.sleep(9000);
 
 			List<WebElement> activeColumns = driver.findElements(By.name("Created_Apps"));
 			Thread.sleep(1000);
@@ -3126,21 +3128,15 @@ public class LoginToAppmaker {
 			{
 			    x.get(0).click();
 			}
-
-			String actual_msg = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
-			String expect = "Login Successful";
-
-			if (actual_msg.contains(expect)) {
-				System.out.println("Validation passed = " + actual_msg);
-			} else {
-				System.out.println("Test Case Failed = " + actual_msg);
-			}
-
 			Thread.sleep(5000);
-			
+
 			driver.manage().deleteAllCookies();
 			System.out.println("All cookies Deleted");
 			Thread.sleep(5000);
+			
+			driver.navigate().refresh();
+			driver.navigate().refresh();
+			Thread.sleep(9000);
 
 			List<WebElement> activeColumns = driver.findElements(By.name("Created_Apps"));
 			Thread.sleep(1000);
