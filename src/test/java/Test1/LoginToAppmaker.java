@@ -168,8 +168,15 @@ public class LoginToAppmaker {
 		driver.navigate().refresh();
 		Thread.sleep(5000);
 
-		List<WebElement> a = driver.findElements(By.name("New_Templates"));
-		a.get(0).click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement astro = driver.findElement(By.className("auto-btn-select-Astro"));
+		js.executeScript("arguments[0].scrollIntoView();", astro);
+		Thread.sleep(4000);
+	
+		WebElement astro1 = driver.findElement(By.className("auto-btn-select-Astro"));
+		JavascriptExecutor js1= (JavascriptExecutor) driver;
+		js1.executeScript("arguments[0].click();", astro1); 
+		Thread.sleep(5000);
 		System.out.println("Astro Template selected ");
 		Thread.sleep(4000);
 		
