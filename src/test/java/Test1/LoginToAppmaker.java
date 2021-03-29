@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+
 //import java.ut il.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,11 +24,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-//---------------------------------Astro Template --------------------------------------------------------------
+//---------------------------------Education Template --------------------------------------------------------------
 
 public class LoginToAppmaker {
 
-	public String baseURL ="https://appmakercms.otenro.com/app/login";
+	public String baseURL ="https://appmaker.otenro.com/app/login";
 	public String ResetPasswordURL = "https://appmaker.otenro.com/app/resetPassword/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjVkOTJmNDAwMTZlYmUyNmQ1YjhiOGVmZCIsImVtYWlsIjoic2FrdW50aGFsYW5mbUBnbWFpbC5jb20iLCJpYXQiOjE1NzAwOTIwMDB9.kr02qnxDVijmzwhnrb717czXZA7Hf99ikGgrcd3XQZg";
 	
 	public WebDriver driver;
@@ -151,7 +151,7 @@ public class LoginToAppmaker {
 	@Test(priority = 3 ) // (priority=3)
 	public void CreateNewApp() throws Exception {
 		
-		System.out.println("--------------------------Starting to create new app using ASTRO template-------------------------------->>");
+		System.out.println("--------------------------Starting to create new app using Eduaction template-------------------------------->>");
 
 		driver.findElement(By.name("Create_New_App")).click();
 		System.out.println("Select a app button clicked");
@@ -169,13 +169,13 @@ public class LoginToAppmaker {
 		Thread.sleep(5000);
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement astro = driver.findElement(By.className("auto-btn-select-Astro"));
-		js.executeScript("arguments[0].scrollIntoView();", astro);
+		WebElement Element = driver.findElement(By.className("auto-btn-select-Education"));
+		js.executeScript("arguments[0].scrollIntoView();", Element);
 		Thread.sleep(4000);
 	
-		WebElement astro1 = driver.findElement(By.className("auto-btn-select-Astro"));
+		WebElement education = driver.findElement(By.className("auto-btn-select-Education"));
 		JavascriptExecutor js1= (JavascriptExecutor) driver;
-		js1.executeScript("arguments[0].click();", astro1); 
+		js1.executeScript("arguments[0].click();", education); 
 		Thread.sleep(5000);
 		System.out.println("Astro Template selected ");
 		Thread.sleep(4000);
@@ -231,7 +231,7 @@ public class LoginToAppmaker {
 		String generatedString = buffer.toString();
 
 		WebElement App = driver.findElement(By.name("appName"));
-		App.sendKeys(generatedString +" Astro");
+		App.sendKeys(generatedString +" Education");
 		Thread.sleep(2000);
 
 		WebElement Appname = driver.findElement(By.name("appName"));
@@ -1401,10 +1401,169 @@ public class LoginToAppmaker {
 		System.out.println("---------------------------------------Page added successfully--------------------------");
 
 	}
+	
+	@Test(priority = 12 ) // (priority=5)
+	public void AddNewHiddenPage() throws Exception {
+			
+		driver.findElement(By.name("Create_page_btn")).click();
+		System.out.println("----Create_page_btn clicked---->>");
+		Thread.sleep(2000);
+
+		driver.findElement(By.name("title")).sendKeys("page 2 Hidden");
+		System.out.println("----Title Entered---->>");
+		Thread.sleep(2000);
+
+		// Image uploading
+
+		Robot robot = new Robot();
+		
+		JavascriptExecutor js14 = (JavascriptExecutor) driver;
+		js14.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput1")));
+
+		robot.setAutoDelay(2000);
+
+		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic11.jpg");
+
+		robot.setAutoDelay(2000);
+		System.out.println("----Browse Image button clicked and image uploaded---->>");
+
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).clickAndHold().perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).release().perform();
+
+		}
+		System.out.println("------Image croped---->>");
+
+		Thread.sleep(2000);
+
+		driver.findElement(By.cssSelector(".upper-canvas")).click();
+		driver.findElement(By.name("Crop_&_Save_btn")).click();
+		System.out.println("------Crop & Save button clicked---->>");
+
+		Thread.sleep(4000);
+
+// Catch validation message
+
+		String actual_msg1 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
+		String expect1 = "Image has been uploaded successfully";
+
+		if (actual_msg1.contains(expect1)) {
+			System.out.println("Validation passed = " + actual_msg1);
+		} else {
+			System.out.println("Test Case Failed = " + actual_msg1);
+		}
+
+		Thread.sleep(5000);
+		
+// Page description section -------------------*******************************************************************-------------------------------
+		
+
+		WebElement Pagedescription = driver.findElement(By.cssSelector(".ql-editor"));
+		Pagedescription.click();
+		Pagedescription.sendKeys("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+		Thread.sleep(4000);
+		Pagedescription.sendKeys(Keys.CONTROL,"a");
+		Thread.sleep(2000);
+		
+		driver.findElement(By.className("ql-bold")).click();
+		System.out.println("------Bold button clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.className("ql-italic")).click();
+		System.out.println("------Italic button clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.className("ql-underline")).click();
+		System.out.println("------Under line button clicked ---->>");
+		Thread.sleep(3000);
+		
+		Pagedescription.click();
+		
+		
+//For the page description image has been added from below code --------------------------------------------------------------------------------
+		
+		JavascriptExecutor js21 = (JavascriptExecutor) driver;
+		js21.executeScript("arguments[0].click();", driver.findElement(By.className("ql-image")));
+
+		robot.setAutoDelay(2000);
+
+		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic13.jpg");
+
+		robot.setAutoDelay(2000);
+		System.out.println("----Browse Image button clicked and image uploaded---->>");
+
+		Thread.sleep(4000);
+		
+// From below code Video is added for the page description ----------------------------------------------------------------------------------
+	
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-video")).click();
+		System.out.println("------Add video url icon clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-tooltip input[type='text']")).sendKeys("https://www.youtube.com/watch?v=49RZx5tUKM4");
+		System.out.println("------video url entered ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-action")).click();
+		System.out.println("------Save button clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.name("check_is_question")).click();
+		Thread.sleep(2000);
+		System.out.println("------Hide Page checkbox clicked ---->>");
+		
+		driver.findElement(By.name("search_categ")).sendKeys("Test004");
+		Thread.sleep(2000);
+		System.out.println("------search_category text entered ---->>");
+
+		List<WebElement> b1 = driver.findElements(By.name("mainsub_cat"));
+		b1.get(0).click();
+		System.out.println("------main_category clicked---->>");
+		Thread.sleep(2000);
+
+		driver.findElement(By.name("Enable_Comments_chekbox")).click();
+		Thread.sleep(2000);
+		System.out.println("------Enable Comments checkbox ticked ---->>");
+
+		driver.findElement(By.name("Enable_Messaging_chekbox")).click();
+		Thread.sleep(4000);
+		System.out.println("------Enable Messaging checkbox ticked---->>");
+
+		driver.findElement(By.className("automation-create-page-btn-publish")).click();
+		Thread.sleep(2000);
+		System.out.println("------Publish button clicked---->>");
+		
+		String actual_msg2 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
+		String expect2 = "Your article has successfully been published ";
+
+		if (actual_msg2.contains(expect2)) {
+			System.out.println("Validation passed = " + actual_msg2);
+		} else {
+			System.out.println("Test Case Failed = " + actual_msg2);
+		}
+
+		Thread.sleep(4000);
+		
+		
+	}
+		
 		
 // --------***********************************--------------------- Add new page with PDF-----------------------------------------***************************************---------------------------------------
 
-	@Test(priority = 12 ) // (priority=5)
+	@Test(priority = 13 ) // (priority=5)
 	public void Add_PDF_Page() throws Exception {	
 
 		System.out.println("--------------------------Starting to add page with PDF -------------------------------->>");
@@ -1540,11 +1699,780 @@ public class LoginToAppmaker {
 		System.out.println("---------------------------------------PDF page added--------------------------");
 		
 	}
+	
+	@Test(priority = 14 ) // (priority=5)
+	public void AddNew_Question_Page() throws Exception {
+	
+		driver.findElement(By.name("Create_page_btn")).click();
+		System.out.println("----Create_page_btn clicked---->>");
+		Thread.sleep(2000);
+
+		driver.findElement(By.name("title")).sendKeys("Question page 1");
+		System.out.println("----Title Entered---->>");
+		Thread.sleep(2000);
+
+		// Image uploading
+
+		Robot robot = new Robot();
+		
+		JavascriptExecutor js14 = (JavascriptExecutor) driver;
+		js14.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput1")));
+
+		robot.setAutoDelay(2000);
+
+		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic18.jpg");
+
+		robot.setAutoDelay(2000);
+		System.out.println("----Browse Image button clicked and image uploaded---->>");
+
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).clickAndHold().perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).release().perform();
+
+		}
+		System.out.println("------Image croped---->>");
+
+		Thread.sleep(2000);
+
+		driver.findElement(By.cssSelector(".upper-canvas")).click();
+		driver.findElement(By.name("Crop_&_Save_btn")).click();
+		System.out.println("------Crop & Save button clicked---->>");
+
+		Thread.sleep(4000);
+
+// Catch validation message
+
+		String actual_msg1 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
+		String expect1 = "Image has been uploaded successfully";
+
+		if (actual_msg1.contains(expect1)) {
+			System.out.println("Validation passed = " + actual_msg1);
+		} else {
+			System.out.println("Test Case Failed = " + actual_msg1);
+		}
+
+		Thread.sleep(5000);
+		
+// Page description section -------------------*******************************************************************-------------------------------
+
+
+		WebElement Pagedescription = driver.findElement(By.cssSelector(".ql-editor"));
+		Pagedescription.click();
+		Pagedescription.sendKeys("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+		Thread.sleep(4000);
+		Pagedescription.sendKeys(Keys.CONTROL,"a");
+		Thread.sleep(2000);
+		
+		driver.findElement(By.className("ql-bold")).click();
+		System.out.println("------Bold button clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.className("ql-italic")).click();
+		System.out.println("------Italic button clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.className("ql-underline")).click();
+		System.out.println("------Under line button clicked ---->>");
+		Thread.sleep(3000);
+		
+		Pagedescription.click();
+		
+		
+//For the page description image has been added from below code --------------------------------------------------------------------------------
+		
+		JavascriptExecutor js21 = (JavascriptExecutor) driver;
+		js21.executeScript("arguments[0].click();", driver.findElement(By.className("ql-image")));
+
+		robot.setAutoDelay(2000);
+
+		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic4.jpg");
+
+		robot.setAutoDelay(2000);
+		System.out.println("----Browse Image button clicked and image uploaded---->>");
+
+		Thread.sleep(4000);
+		
+// From below code Video is added for the page description ----------------------------------------------------------------------------------
+	
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-video")).click();
+		System.out.println("------Add video url icon clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-tooltip input[type='text']")).sendKeys("https://www.youtube.com/watch?v=49RZx5tUKM4");
+		System.out.println("------video url entered ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-action")).click();
+		System.out.println("------Save button clicked ---->>");
+		Thread.sleep(3000);
+		
+		
+		driver.findElement(By.name("search_categ")).sendKeys("Test004");
+		Thread.sleep(2000);
+		System.out.println("------search_category text entered ---->>");
+
+		List<WebElement> b1 = driver.findElements(By.name("mainsub_cat"));
+		b1.get(0).click();
+		System.out.println("------main_category clicked---->>");
+		Thread.sleep(2000);
+
+		driver.findElement(By.name("Enable_Comments_chekbox")).click();
+		Thread.sleep(2000);
+		System.out.println("------Enable Comments checkbox ticked ---->>");
+
+		driver.findElement(By.name("Enable_Messaging_chekbox")).click();
+		Thread.sleep(4000);
+		System.out.println("------Enable Messaging checkbox ticked---->>");
+		
+//----------------*******************************Adding Questions ***************-----------------------------------------		
+
+		driver.findElement(By.cssSelector(".ng-scope:nth-child(9) .md-container")).click();
+		System.out.println("------Add Questions checkbox ticked---->>");
+		Thread.sleep(20000);
+		
+		driver.findElement(By.className("auto-btn-addAnotherQuestion")).click();
+		Thread.sleep(4000);
+		System.out.println("------Add another Questions clicked---->>");
+		
+		driver.findElement(By.className("auto-question-type-selector")).click();
+		Thread.sleep(4000);
+		System.out.println("------ Questions type dropdown clicked---->>");
+		
+		List<WebElement> Qtype = driver.findElements(By.className("auto-selector-options-question-type"));
+		Qtype.get(2).click();
+		System.out.println("------QUESTION TYPE selected---->>");
+		Thread.sleep(2000);
+		
+		driver.findElement(By.className("auto-result-type-selector")).click();
+		System.out.println("------RESULTS TYPE dropdown clicked---->>");
+		Thread.sleep(4000);
+		
+		List<WebElement> QResult = driver.findElements(By.className("auto-selector-options-result-type"));
+		QResult.get(1).click();
+		System.out.println("------RESULTS TYPE selected---->>");
+		Thread.sleep(3000);
+		
+//--------Question 1
+		
+		driver.findElement(By.name("questionName")).clear();
+		driver.findElement(By.name("questionName")).sendKeys("Question 1");
+		System.out.println("------question Name entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.cssSelector(".ql-blank > p")).sendKeys("Please select the correct answer for the question");
+		System.out.println("------question DESCRIPTION entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("awserName")).sendKeys("A");
+		System.out.println("------question answer entered---->>");
+		Thread.sleep(2000);
+		
+		driver.findElement(By.cssSelector(".me-default-button > .ng-binding")).click();
+		System.out.println("------Save button clicked---->>");
+		Thread.sleep(4000);
+		
+//--------Question 2
+		
+		driver.findElement(By.className("auto-btn-addAnotherQuestion")).click();
+		System.out.println("------Add another Questions clicked---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.className("auto-question-type-selector")).click();
+		Thread.sleep(4000);
+		System.out.println("------ Questions type dropdown clicked---->>");
+		
+		List<WebElement> Qtype2 = driver.findElements(By.className("auto-selector-options-question-type"));
+		Qtype2.get(1).click();
+		System.out.println("------QUESTION2 TYPE selected---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.className("auto-result-type-selector")).click();
+		System.out.println("------RESULTS TYPE dropdown clicked---->>");
+		Thread.sleep(4000);
+		
+		List<WebElement> QResult2 = driver.findElements(By.className("auto-selector-options-result-type"));
+		QResult2.get(1).click();
+		System.out.println("------RESULTS TYPE selected---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.name("questionName")).clear();
+		driver.findElement(By.name("questionName")).sendKeys("Question 2");
+		System.out.println("------question Name entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.cssSelector(".ql-blank > p")).sendKeys("select the correct answer for the question");
+		System.out.println("------question DESCRIPTION entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("awserName")).sendKeys("A");
+		System.out.println("------question answer1 entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.linkText("Add another Anwser")).click();
+		System.out.println("------Add another answer link clicked---->>");
+		Thread.sleep(4000);
+		
+		List<WebElement> answer2 = driver.findElements(By.name("awserName"));
+		answer2.get(1).sendKeys("B");
+		System.out.println("----Sencond answer added---->>");
+		Thread.sleep(3000);
+		
+		List<WebElement> radioa = driver.findElements(By.name("check_is_question"));
+		radioa.get(2).click();
+		System.out.println("------corect answer radio button clicked---->>");
+		Thread.sleep(4000);
+		
+		JavascriptExecutor js31 = (JavascriptExecutor) driver;
+		WebElement scroll = driver.findElement(By.linkText("Add another Anwser"));
+		js31.executeScript("arguments[0].scrollIntoView();", scroll);
+		Thread.sleep(7000);
+		
+		driver.findElement(By.cssSelector(".me-default-button > .ng-binding")).click();
+		System.out.println("------Save button clicked---->>");
+		Thread.sleep(4000);
+		
+//--------Question 3
+	
+		driver.findElement(By.className("auto-btn-addAnotherQuestion")).click();
+		System.out.println("------Add another Questions clicked---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.className("auto-question-type-selector")).click();
+		Thread.sleep(4000);
+		System.out.println("------ Questions type dropdown clicked---->>");
+		
+		List<WebElement> Qtype3 = driver.findElements(By.className("auto-selector-options-question-type"));
+		Qtype3.get(0).click();
+		System.out.println("------QUESTION3 TYPE selected---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.name("questionName")).clear();
+		driver.findElement(By.name("questionName")).sendKeys("Question 3");
+		System.out.println("------question Name entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.cssSelector(".ql-blank > p")).sendKeys("Answer the Question");
+		System.out.println("------question DESCRIPTION entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("AnwserName")).clear();
+		driver.findElement(By.name("AnwserName")).sendKeys("C");
+		System.out.println("------question answer entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("nextButtonAction")).click();
+		System.out.println("------Hidden page select dropdown clicked ---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.xpath("//*[@id=\"select_option_139\"]")).click();
+		System.out.println("------Hidden page selected ---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.linkText("Add another Anwser")).click();
+		System.out.println("------Add another answer link clicked---->>");
+		Thread.sleep(4000);
+		
+		List<WebElement>Answer2 = driver.findElements(By.name("AnwserName"));
+		Answer2.get(1).clear();
+		Answer2.get(1).sendKeys("D");
+		System.out.println("------answer2 entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.xpath("//*[@id=\"select_140\"]")).click();
+		System.out.println("------Hidden page select dropdown clicked ---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.xpath("//*[@id=\"select_option_142\"]")).click();
+		System.out.println("------Hidden page selected ---->>");
+		Thread.sleep(4000);
+
+		driver.findElement(By.cssSelector(".me-default-button > .ng-binding")).click();
+		System.out.println("------Save button clicked---->>");
+		Thread.sleep(4000);
+		
+		
+		
+///-------------*******************Edit Question*******************------------------------------
+		
+		driver.findElement(By.linkText("Please select the correct answer for the question")).click();
+		System.out.println("------Question clicked to edit---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("questionName")).clear();
+		driver.findElement(By.name("questionName")).sendKeys("Ques Edited");
+		System.out.println("------question Name Edited---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.cssSelector(".ng-valid-maxlength > div > .ql-container > .ql-editor")).clear();
+		driver.findElement(By.cssSelector(".ng-valid-maxlength > div > .ql-container > .ql-editor")).sendKeys("Select Correct answer");
+		System.out.println("------question DESCRIPTION Edited---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("awserName")).clear();
+		driver.findElement(By.name("awserName")).sendKeys("Cat");
+		System.out.println("------question answer Edited---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.cssSelector(".me-default-button > .ng-binding")).click();
+		System.out.println("------Update button clicked---->>");
+		Thread.sleep(4000);
+
+//-----------------**************Delete Question************************* -----------------------------------------------------------------
+		
+		driver.findElement(By.name("Ques_selected")).click();
+		System.out.println("------question selected to delete---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.className("auto-btn-edit-page-delete")).click();
+		System.out.println("------question deleted---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.className("automation-create-page-btn-publish")).click();
+		System.out.println("------Publish button clicked---->>");
+		Thread.sleep(2000);
+		
+		String actual_msg2 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
+		String expect2 = "Your article has successfully been published ";
+
+		if (actual_msg2.contains(expect2)) {
+			System.out.println("Validation passed = " + actual_msg2);
+		} else {
+			System.out.println("Test Case Failed = " + actual_msg2);
+		}
+
+		Thread.sleep(4000);
+		
+	}
+	
+	
+	@Test(priority = 15 ) // (priority=5)
+	public void AddNew_Question_Page_With_next_Button() throws Exception {
+		
+		
+		driver.findElement(By.name("Create_page_btn")).click();
+		System.out.println("----Create_page_btn clicked---->>");
+		Thread.sleep(2000);
+
+		driver.findElement(By.name("title")).sendKeys("Question page 2");
+		System.out.println("----Title Entered---->>");
+		Thread.sleep(2000);
+
+		// Image uploading
+
+		Robot robot = new Robot();
+		
+		JavascriptExecutor js14 = (JavascriptExecutor) driver;
+		js14.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput1")));
+
+		robot.setAutoDelay(2000);
+
+		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic7.jpg");
+
+		robot.setAutoDelay(2000);
+		System.out.println("----Browse Image button clicked and image uploaded---->>");
+
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).clickAndHold().perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).release().perform();
+
+		}
+		System.out.println("------Image croped---->>");
+
+		Thread.sleep(2000);
+
+		driver.findElement(By.cssSelector(".upper-canvas")).click();
+		driver.findElement(By.name("Crop_&_Save_btn")).click();
+		System.out.println("------Crop & Save button clicked---->>");
+
+		Thread.sleep(4000);
+
+// Catch validation message
+
+		String actual_msg1 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
+		String expect1 = "Image has been uploaded successfully";
+
+		if (actual_msg1.contains(expect1)) {
+			System.out.println("Validation passed = " + actual_msg1);
+		} else {
+			System.out.println("Test Case Failed = " + actual_msg1);
+		}
+
+		Thread.sleep(5000);
+		
+// Page description section -------------------*******************************************************************-------------------------------
+
+
+		WebElement Pagedescription = driver.findElement(By.cssSelector(".ql-editor"));
+		Pagedescription.click();
+		Pagedescription.sendKeys("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+		Thread.sleep(4000);
+		Pagedescription.sendKeys(Keys.CONTROL,"a");
+		Thread.sleep(2000);
+		
+		driver.findElement(By.className("ql-bold")).click();
+		System.out.println("------Bold button clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.className("ql-italic")).click();
+		System.out.println("------Italic button clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.className("ql-underline")).click();
+		System.out.println("------Under line button clicked ---->>");
+		Thread.sleep(3000);
+		
+		Pagedescription.click();
+		
+		
+//For the page description image has been added from below code --------------------------------------------------------------------------------
+		
+		JavascriptExecutor js21 = (JavascriptExecutor) driver;
+		js21.executeScript("arguments[0].click();", driver.findElement(By.className("ql-image")));
+
+		robot.setAutoDelay(2000);
+
+		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic9.jpg");
+
+		robot.setAutoDelay(2000);
+		System.out.println("----Browse Image button clicked and image uploaded---->>");
+
+		Thread.sleep(4000);
+		
+// From below code Video is added for the page description ----------------------------------------------------------------------------------
+	
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-video")).click();
+		System.out.println("------Add video url icon clicked ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-tooltip input[type='text']")).sendKeys("https://www.youtube.com/watch?v=49RZx5tUKM4");
+		System.out.println("------video url entered ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-action")).click();
+		System.out.println("------Save button clicked ---->>");
+		Thread.sleep(3000);
+		
+		
+		driver.findElement(By.name("search_categ")).sendKeys("Test004");
+		Thread.sleep(2000);
+		System.out.println("------search_category text entered ---->>");
+
+		List<WebElement> b1 = driver.findElements(By.name("mainsub_cat"));
+		b1.get(0).click();
+		System.out.println("------main_category clicked---->>");
+		Thread.sleep(2000);
+
+		driver.findElement(By.name("Enable_Comments_chekbox")).click();
+		Thread.sleep(2000);
+		System.out.println("------Enable Comments checkbox ticked ---->>");
+
+		driver.findElement(By.name("Enable_Messaging_chekbox")).click();
+		Thread.sleep(4000);
+		System.out.println("------Enable Messaging checkbox ticked---->>");
+		
+//----------------*******************************Adding Questions ***************-----------------------------------------		
+
+		driver.findElement(By.cssSelector(".ng-scope:nth-child(9) .md-container")).click();
+		Thread.sleep(4000);
+		System.out.println("------Add Questions checkbox ticked---->>");
+		
+		driver.findElement(By.className("auto-btn-addAnotherQuestion")).click();
+		Thread.sleep(4000);
+		System.out.println("------Add another Questions clicked---->>");
+		
+		driver.findElement(By.className("auto-question-type-selector")).click();
+		Thread.sleep(4000);
+		System.out.println("------ Questions type dropdown clicked---->>");
+		
+		List<WebElement> Qtype = driver.findElements(By.className("auto-selector-options-question-type"));
+		Qtype.get(1).click();
+		System.out.println("------QUESTION TYPE selected---->>");
+		Thread.sleep(2000);
+		
+		driver.findElement(By.className("auto-result-type-selector")).click();
+		System.out.println("------RESULTS TYPE dropdown clicked---->>");
+		Thread.sleep(4000);
+		
+		List<WebElement> QResult = driver.findElements(By.className("auto-selector-options-result-type"));
+		QResult.get(0).click();
+		System.out.println("------RESULTS TYPE selected---->>");
+		Thread.sleep(3000);
+		
+//--------Question 1
+		
+		driver.findElement(By.name("questionName")).clear();
+		driver.findElement(By.name("questionName")).sendKeys("Question 1");
+		System.out.println("------question Name entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.cssSelector(".ql-blank > p")).sendKeys("Please select the correct answer for the question");
+		System.out.println("------question DESCRIPTION entered---->>");
+		Thread.sleep(4000);
+		
+		JavascriptExecutor js31 = (JavascriptExecutor) driver;
+		WebElement Element41 = driver.findElement(By.cssSelector(".md-primary .md-bar"));
+		js31.executeScript("arguments[0].scrollIntoView();", Element41);
+		Thread.sleep(7000);
+		
+		WebElement answerY = driver.findElement(By.cssSelector(".md-primary .md-bar"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(answerY).click().build().perform();
+		System.out.println("------answer with image active button clicked---->>");
+		Thread.sleep(4000);
+		
+		JavascriptExecutor js141 = (JavascriptExecutor) driver;
+		js141.executeScript("arguments[0].click();", driver.findElement(By.id("fileInputQuestion0")));
+
+		robot.setAutoDelay(2000);
+
+		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic11.jpg");
+
+		robot.setAutoDelay(2000);
+		System.out.println("----Browse Image button clicked and image uploaded---->>");
+
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).clickAndHold().perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).release().perform();
+
+		}
+		System.out.println("------Image croped---->>");
+
+		Thread.sleep(2000);
+
+		driver.findElement(By.cssSelector(".upper-canvas")).click();
+		driver.findElement(By.name("Crop_&_Save_btn")).click();
+		System.out.println("------Crop & Save button clicked---->>");
+
+		Thread.sleep(5000);
+
+		
+		driver.findElement(By.linkText("Add another Anwser")).click();
+		System.out.println("------Add another answer link clicked---->>");
+		Thread.sleep(4000);
+		
+		JavascriptExecutor js01 = (JavascriptExecutor) driver;
+		js01.executeScript("arguments[0].click();", driver.findElement(By.id("fileInputQuestion1")));
+
+		robot.setAutoDelay(2000);
+
+		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic15.jpg");
+
+		robot.setAutoDelay(2000);
+		System.out.println("----Browse Image button clicked and image uploaded---->>");
+
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).clickAndHold().perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).perform();
+
+		}
+		{
+			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).release().perform();
+
+		}
+		System.out.println("------Image croped---->>");
+
+		Thread.sleep(2000);
+
+		driver.findElement(By.cssSelector(".upper-canvas")).click();
+		driver.findElement(By.name("Crop_&_Save_btn")).click();
+		System.out.println("------Crop & Save button clicked---->>");
+
+		Thread.sleep(5000);
+		
+		JavascriptExecutor jss = (JavascriptExecutor) driver;
+		WebElement Element03 = driver.findElement(By.id("fileInputQuestion1"));
+		jss.executeScript("arguments[0].scrollIntoView();", Element03);
+		Thread.sleep(7000);
+		
+		List<WebElement> radioa = driver.findElements(By.name("check_is_question"));
+		radioa.get(2).click();
+		System.out.println("------corect answer radio button clicked---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("Points")).sendKeys("5");
+		System.out.println("------points added---->>");
+		Thread.sleep(4000);
+		
+		
+		driver.findElement(By.cssSelector(".me-default-button > .ng-binding")).click();
+		System.out.println("------Save button clicked---->>");
+		Thread.sleep(4000);
+		
+//------------------******Adding Next Button******************S -----------------------------------------------------------
+			
+				
+		driver.findElement(By.className("auto-btn-add-nxt-button")).click();
+		System.out.println("------Add next button clicked---->>");
+		Thread.sleep(4000);
+				
+		driver.findElement(By.className("auto-condition-type-select")).click();
+		System.out.println("------CONDITION TYPE dropdown clicked---->>");
+		Thread.sleep(4000);
+				
+		List<WebElement>conditiontype = driver.findElements(By.className("auto-condition-type-select-options"));
+		conditiontype.get(0).click();
+		System.out.println("------CONDITION TYPE selected---->>");
+		Thread.sleep(4000);
+				
+		driver.findElement(By.className("auto-selected-page-select")).click();
+		System.out.println("------SELECTED PAGE dropdown clicked---->>");
+		Thread.sleep(4000);
+				
+		List<WebElement>select1 = driver.findElements(By.className("auto-selected-page-select-options"));
+		select1.get(0).click();
+		System.out.println("------PAGE selected---->>");
+		Thread.sleep(4000);
+		
+//----------------------below code can be removed when this date and time publishing issue has been fixed			
+//Issue - Add question with MCQ and for answer upload image and try to submit page.then you will 
+//have to edit the date time to submit the page. 
+		JavascriptExecutor jsa = (JavascriptExecutor) driver;
+		WebElement Element04 = driver.findElement(By.name("title"));
+		jsa.executeScript("arguments[0].scrollIntoView();", Element04);
+		Thread.sleep(7000);
+		
+		
+		driver.findElement(By.cssSelector(".removeIcon > use")).click();
+		System.out.println("------remove date and time ---->>");
+		Thread.sleep(3000);
+		
+		driver.findElement(By.cssSelector(".removeIcon > use")).click();
+		System.out.println("------remove date and time ---->>");
+		Thread.sleep(3000);
+		
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		WebElement Element05 = driver.findElement(By.className("automation-create-page-btn-publish"));
+		jse.executeScript("arguments[0].scrollIntoView();", Element05);
+		Thread.sleep(7000);
+//--------------------------------------------------------------------------------------------------
+		
+		driver.findElement(By.className("automation-create-page-btn-publish")).click();
+		System.out.println("------Publish button clicked---->>");
+		Thread.sleep(2000);
+				
+		String actual_msg2 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
+		String expect2 = "Your article has successfully been published ";
+
+		if (actual_msg2.contains(expect2)) {
+			System.out.println("Validation passed = " + actual_msg2);
+		} else {
+			System.out.println("Test Case Failed = " + actual_msg2);
+		}
+
+		Thread.sleep(4000);
+		
+	}
+	
+	@Test(priority = 16 ) // (priority=5)
+	public void Edit_Question_Page() throws Exception {
+		
+		
+		List<WebElement> b1 = driver.findElements(By.name("edit_article"));
+		b1.get(2).click();
+		System.out.println("----edit_article link clicked---->>");
+		Thread.sleep(2000);
+		
+		driver.findElement(By.name("title")).clear();
+		driver.findElement(By.name("title")).sendKeys("Question page 1 Edited");
+		System.out.println("----Title Entered---->>");
+		Thread.sleep(2000);
+		
+		JavascriptExecutor js31 = (JavascriptExecutor) driver;
+		WebElement Element41 = driver.findElement(By.cssSelector(".another-qBtn:nth-child(1) > .ng-scope:nth-child(2)"));
+		js31.executeScript("arguments[0].scrollIntoView();", Element41);
+		Thread.sleep(7000);
+		
+		driver.findElement(By.cssSelector(".another-qBtn:nth-child(1) > .ng-scope:nth-child(2)")).click();
+		System.out.println("------Add another Questions clicked---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("questionName")).clear();
+		driver.findElement(By.name("questionName")).sendKeys("Question 4");
+		System.out.println("------question Name entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.cssSelector(".ql-blank > p")).sendKeys("Answer the Question please");
+		System.out.println("------question DESCRIPTION entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("awserName")).sendKeys("Dog");
+		System.out.println("------question answer entered---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.cssSelector(".me-default-button > .ng-binding")).click();
+		System.out.println("------Save button clicked---->>");
+		Thread.sleep(4000);
+		
+		driver.findElement(By.name("update_btn")).click();
+		System.out.println("------update button clicked---->>");
+		Thread.sleep(4000);
+		
+		String actual_msg2 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
+		String expect2 = "Your article has successfully been published ";
+
+		if (actual_msg2.contains(expect2)) {
+			System.out.println("Validation passed = " + actual_msg2);
+		} else {
+			System.out.println("Test Case Failed = " + actual_msg2);
+		}
+
+		Thread.sleep(4000);
+		
+	}
+	
 
 	//-----------------------------------------------***********************************************************--------------------------------	
 	 
-	@Test(priority = 13 ) // (priority=6)
-	public void Edit_Page() throws Exception {
+	@Test(priority = 17 ) // (priority=6)
+	public void Edit_Normal_Page() throws Exception {
 	
 		System.out.println("---------------------------------------Going to Edit the page--------------------------");
 
@@ -1557,7 +2485,7 @@ public class LoginToAppmaker {
 		System.out.println("----Title Entered---->>");
 		Thread.sleep(2000);
 		
-		driver.findElement(By.name("title")).sendKeys("Page 1");
+		driver.findElement(By.name("title")).sendKeys("Page 1 edited");
 		System.out.println("----Title Entered---->>");
 		Thread.sleep(2000);
 		
@@ -1640,261 +2568,29 @@ public class LoginToAppmaker {
 	}
 	//-------------------------------------------------------------*******Add_Page_From_MangePages*****------------------------------------------\
 	
-	@Test(priority = 14 ) // (priority=6)
-	public void Add_Page_From_MangePages() throws Exception {
-	
-		System.out.println("---------------------------------------Adding page from manage pages--------------------------");
-
-		driver.findElement(By.name("Create_page_btn")).click();
-		System.out.println("------ Create_page_btn clicked---->>");
-		Thread.sleep(2000);
-		
-		driver.findElement(By.name("title")).sendKeys("Page 2");
-		System.out.println("----Title Entered---->>");
-		Thread.sleep(2000);
-		
-		Robot robot = new Robot();
-		
-		JavascriptExecutor js1 = (JavascriptExecutor) driver;
-		js1.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput")));
-		robot.setAutoDelay(1000);
-
-//Below code is for capturing image validation part, image should be less than 5 mb
-		
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/5mbimage.jpg");	
-		robot.setAutoDelay(100);
-		
-		String actual_msg21 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
-		robot.setAutoDelay(2000);
-		
-		String expect21 = "Image should be less than 5MB";
-
-		if (actual_msg21.contains(expect21)) {
-			System.out.println("Validation passed = " + actual_msg21);
-		} else {
-			System.out.println("Test Case Failed = " + actual_msg21);
-		}
-
-// Uploading correct image and saving 
-		
-		driver.findElement(By.name("title")).clear();
-		System.out.println("----Title cleared ---->>");
-		Thread.sleep(2000);
-		
-		driver.findElement(By.name("title")).sendKeys("Page 2");
-		System.out.println("----Title Entered---->>");
-		Thread.sleep(2000);
-
-		JavascriptExecutor js14 = (JavascriptExecutor) driver;
-		js14.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput")));
-
-		robot.setAutoDelay(2000);
-		
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic2.jpg");
-
-		robot.setAutoDelay(2000);
-		System.out.println("----Browse Image button clicked and image uploaded---->>");
-
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).clickAndHold().perform();
-
-		}
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).perform();
-
-		}
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).release().perform();
-
-		}
-		System.out.println("------Image croped---->>");
-
-		Thread.sleep(2000);
-
-		driver.findElement(By.cssSelector(".upper-canvas")).click();
-		driver.findElement(By.name("Crop_&_Save_btn")).click();
-		System.out.println("------Crop & Save button clicked---->>");
-
-		Thread.sleep(4000);
-
-// Catch validation message
-
-		String actual_msg1 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
-		String expect1 = "Image has been uploaded successfully";
-
-		if (actual_msg1.contains(expect1)) {
-			System.out.println("Validation passed = " + actual_msg1);
-		} else {
-			System.out.println("Test Case Failed = " + actual_msg1);
-		}
-
-		Thread.sleep(5000);
-
-		driver.findElement(By.name("chk_videoUrl1")).click();
-		System.out.println("------ Youtub video checkbox ticked---->>");
-		Thread.sleep(2000);
-
-		driver.findElement(By.cssSelector("#videoUrl2")).sendKeys("https://www.youtube.com/watch?v=XAh2FujZ-0g");
-		System.out.println("------Youtube video url entered---->>");
-		Thread.sleep(2000);
-		
-		JavascriptExecutor js2 = (JavascriptExecutor) driver;
-		js2.executeScript("arguments[0].click();", driver.findElement(By.name("Select_Img_btn")));
-
-		robot.setAutoDelay(2000);
-
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic5.jpg");
-		robot.setAutoDelay(2000);
-		
-		System.out.println("----Browse Image button clicked and image uploaded---->>");
-
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).clickAndHold().perform();
-
-		}
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).perform();
-
-		}
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).release().perform();
-
-		}
-		System.out.println("------Image croped---->>");
-
-		Thread.sleep(2000);
-
-		driver.findElement(By.cssSelector(".upper-canvas")).click();
-		driver.findElement(By.name("Crop_&_Save_btn")).click();
-		System.out.println("------Crop & Save button clicked---->>");
-
-		Thread.sleep(4000);
-
-		// Catch validation message
-
-		String actual_msg3 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
-		String expect3 = "Image has been uploaded successfully";
-
-		if (actual_msg1.contains(expect3)) {
-			System.out.println("Validation passed = " + actual_msg3);
-		} else {
-			System.out.println("Test Case Failed = " + actual_msg3);
-		}
-		Thread.sleep(4000);
-		
-		
-		
-// Page description section -------------------*******************************************************************-------------------------------
-		
-
-		WebElement Pagedescription = driver.findElement(By.cssSelector(".ql-editor"));
-		Pagedescription.click();
-		Pagedescription.sendKeys("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-		Thread.sleep(4000);
-		Pagedescription.sendKeys(Keys.CONTROL,"a");
-		Thread.sleep(2000);
-	
-		driver.findElement(By.className("ql-bold")).click();
-		System.out.println("------Bold button clicked ---->>");
-		Thread.sleep(3000);
-		
-		driver.findElement(By.className("ql-italic")).click();
-		System.out.println("------Italic button clicked ---->>");
-		Thread.sleep(3000);
-		
-		driver.findElement(By.className("ql-underline")).click();
-		System.out.println("------Under line button clicked ---->>");
-		Thread.sleep(3000);
-	
-		JavascriptExecutor js21 = (JavascriptExecutor) driver;
-		js21.executeScript("arguments[0].click();", driver.findElement(By.className("ql-image")));
-
-		robot.setAutoDelay(2000);
-		
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic7.jpg");
-
-		robot.setAutoDelay(2000);
-		System.out.println("----Browse Image button clicked and image uploaded---->>");
-		Thread.sleep(4000);
-		
-// From below code Video is added for the page description ----------------------------------------------------------------------------------
-		
-		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-video")).click();
-		System.out.println("------Add video url icon clicked ---->>");
-		Thread.sleep(3000);
-		
-		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-tooltip input[type='text']")).sendKeys("https://www.youtube.com/watch?v=49RZx5tUKM4");
-		System.out.println("------video url entered ---->>");
-		Thread.sleep(3000);
-		
-		driver.findElement(By.cssSelector("ng-quill-editor[name='editorText'] .ql-action")).click();
-		System.out.println("------Save button clicked ---->>");
-		Thread.sleep(3000);
 	
 
-		driver.findElement(By.name("search_categ")).sendKeys("Test004");
-		System.out.println("------search_category text entered ---->>");
-		Thread.sleep(2000);
-
-		List<WebElement> b1 = driver.findElements(By.name("mainsub_cat"));
-		b1.get(0).click();
-		System.out.println("------main_category clicked---->>");
-		Thread.sleep(2000);
-
-		driver.findElement(By.name("Enable_Comments_chekbox")).click();
-		System.out.println("------Enable Comments checkbox ticked ---->>");
-		Thread.sleep(2000);
-
-		driver.findElement(By.name("Enable_Messaging_chekbox")).click();
-		System.out.println("------Enable Messaging checkbox ticked---->>");
-		Thread.sleep(4000);
-
-		driver.findElement(By.className("automation-create-page-btn-publish")).click();
-		System.out.println("------Publish button clicked---->>");
-		Thread.sleep(2000);
-
-		String actual_msg2 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
-		String expect2 = "Your article has successfully been published ";
-
-		if (actual_msg2.contains(expect2)) {
-			System.out.println("Validation passed = " + actual_msg2);
-		} else {
-			System.out.println("Test Case Failed = " + actual_msg2);
-		}
-
-		Thread.sleep(4000);
-		
-		System.out.println("---------------------------------------Page added from manage pages-------------------------->>>>>>");
-
-	
-	}
-
-	@Test(priority = 15  ) // (priority=6)
+	@Test(priority = 18  ) // (priority=6)
 	public void From_Manage_pages_Duplcate_pages() throws Exception {
 		
 		System.out.println("---------------------------------------Duplacting pages---------------------------------->>>>");
 
 		
-		List<WebElement> b3 = driver.findElements(By.name("articleselect"));
-		b3.get(1).click();
-		System.out.println("------article selected---->>");
-		Thread.sleep(2000);
+		List<WebElement> c = driver.findElements(By.name("articleselect"));
+		Thread.sleep(1000);
+		c.get(0).click(); // can change inside page inner pages
+		System.out.println("----page selected---->>");
+		Thread.sleep(5000);
+		
+		List<WebElement> c1 = driver.findElements(By.name("articleselect"));
+		Thread.sleep(1000);
+		c1.get(1).click(); // can change inside page inner pages
+		System.out.println("----page selected---->>");
+		Thread.sleep(5000);
 		
 		driver.findElement(By.name("Duplicate_btn")).click();
-		System.out.println("------Duplicate_btn clicked---->>");
-		Thread.sleep(2000);
+		System.out.println("----Duplicate_btn clicked---->>");
+		Thread.sleep(3000);
 		
 		System.out.println("---------------------------------------Pages Duplacted------------------------------------>>>>");
 
@@ -1903,14 +2599,14 @@ public class LoginToAppmaker {
 	
 	//-----------------------------------------------------------------************************************************-----------------------
 	
-	@Test(priority = 16 ) // (priority=6)
+	@Test(priority = 19 ) // (priority=6)
 	public void Delete_Page() throws Exception {
 		
 		System.out.println("---------------------------------------Page deleating-------------------------->>>>");
 
 		
 		List<WebElement> b3 = driver.findElements(By.name("articleselect"));
-		b3.get(2).click();
+		b3.get(1).click();
 		System.out.println("------article selected---->>");
 		Thread.sleep(2000);
 		
@@ -1941,7 +2637,7 @@ public class LoginToAppmaker {
 	//-------------------------------------------------------------------------*********************************************888-------------
 
 
-	@Test(priority = 17 ) // (priority=6)
+	@Test(priority = 20 ) // (priority=6)
 	public void VerifyAppDetailsPages() throws Exception {
 		
 		System.out.println("---------------------------------------Adding app details-------------------------->>>>");
@@ -1949,7 +2645,7 @@ public class LoginToAppmaker {
 		
 		List<WebElement> b = driver.findElements(By.name("Inner_Pages"));
 		Thread.sleep(1000);
-		b.get(4).click(); // can change inside page inner pages
+		b.get(3).click(); // can change inside page inner pages
 		System.out.println("----App details button clicked---->>");
 		Thread.sleep(5000);
 
@@ -2051,7 +2747,7 @@ public class LoginToAppmaker {
 	
 	}
 
-	@Test(priority = 18 ) // (priority=7)
+	@Test(priority = 21 ) // (priority=7)
 	public void AddLogo() throws Exception {
 		
 		System.out.println("---------------------------------------Going to add logo-------------------------->>>>");
@@ -2117,7 +2813,7 @@ public class LoginToAppmaker {
 		
 	}
 
-	@Test(priority = 19 ) // (priority=8)
+	@Test(priority = 22 ) // (priority=8)
 	public void AddFAVIcon() throws Exception {
 		
 		System.out.println("---------------------------------------Going to add FAV icon-------------------------->>>>");
@@ -2176,7 +2872,7 @@ public class LoginToAppmaker {
 
 	}
 
-	@Test(priority = 20 ) // (priority=9)
+	@Test(priority = 23 ) // (priority=9)
 	public void ChangeLookAndFeel() throws Exception {
 		
 		System.out.println("---------------------------------------Going to add Look and Feel colors-------------------------->>>>");
@@ -2443,7 +3139,7 @@ public class LoginToAppmaker {
 	}
 	
 
-	@Test(priority = 21 ) // (priority=10)
+	@Test(priority = 24 ) // (priority=10)
 	public void Report_A_Bug() throws Exception {
 
 		System.out.println("---------------------------------------Going to Report a bug-------------------------->>>>");
@@ -2471,7 +3167,7 @@ public class LoginToAppmaker {
 
 	
 	
-	@Test(priority = 22 ) // (priority=10)
+	@Test(priority = 25 ) // (priority=10)
 	public void VerifyPublishSection() throws IOException, InterruptedException, AWTException {
 
 		// For this if we are creating free app we need to make all the Categories free
@@ -2604,7 +3300,7 @@ public class LoginToAppmaker {
 		
 	} 
 
-	@Test(priority = 23 ) // (priority=10)	
+	@Test(priority = 26 ) // (priority=10)	
 	public void VerifyConfigurationSection() throws Exception {
 		
 		System.out.println("--------------------------Starting to add configuration details -------------------------------->>");
@@ -2818,7 +3514,7 @@ public class LoginToAppmaker {
 		System.out.println("--------------------------Configuration details added -------------------------------->>");
 	}
 
-	@Test(priority = 24 ) // (priority=10)
+	@Test(priority = 27 ) // (priority=10)
 	public void web_config() throws Exception {
 		
 		System.out.println("--------------------------Starting to add website config -------------------------------->>");
@@ -2862,7 +3558,7 @@ public class LoginToAppmaker {
 //****///////////////////////////////////////////---------Reject_App_from_super_Admin-------------///////////////////////////////////////////////////////*****/
 
 	
-	@Test(priority= 25 ) // (priority=10)
+	@Test(priority= 28 ) // (priority=10)
 	public void Reject_App_from_super_Admin() throws Exception {
 
 		System.out.println("--------------------------Going to reject app from super admin -------------------------------->>");
@@ -2947,7 +3643,7 @@ public class LoginToAppmaker {
 		
 	}
 		
-	@Test(priority= 26 ) // (priority=10)
+	@Test(priority= 29 ) // (priority=10)
 	public void Submit_For_Approve_App_Again() throws Exception {
 		 
 // login
@@ -3012,22 +3708,23 @@ public class LoginToAppmaker {
 			System.out.println("----Save button clicked---->>");
 			Thread.sleep(5000);
 			
+			driver.findElement(By.name("Profile_View1")).click();
+			Thread.sleep(2000);
+			System.out.println("Profile button clicked = Passed");
+
+			driver.findElement(By.name("LogOut")).click();
+			System.out.println("Successfully logged out ");
+			Thread.sleep(4000);
+			
 			System.out.println("--------------------------App Submited for approval -------------------------------->>");
 
 		}
 	
-	@Test(priority = 27 ) // (priority=10)
+	@Test(priority = 30 ) // (priority=10)
 	public void Login_Super_Admin_For_SubmitForConfig() throws Exception {
 		
 		System.out.println("--------------------------Going to submit for config from super admin -------------------------------->>");
 
-		
-		driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
-		Thread.sleep(4000);
-		
-		 ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-		 driver.switchTo().window(tabs.get(0)); //switches to new tab
-		 driver.get("https://appmakercms.otenro.com/app/login");
 			
 			driver.findElement(By.name("email")).sendKeys("su@simatosolutions.com");
 			Thread.sleep(2000);
@@ -3109,7 +3806,7 @@ public class LoginToAppmaker {
 	
 	
 	
-	@Test(priority= 28 ) // (priority=10)
+	@Test(priority= 31 ) // (priority=10)
 	public void Check_App_Status() throws Exception {
 		 
 // login
