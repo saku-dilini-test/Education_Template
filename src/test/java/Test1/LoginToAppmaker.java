@@ -1130,7 +1130,7 @@ public class LoginToAppmaker {
 
 //Below code is for capturing image validation part, image should be less than 5 mb--------------------------------------------
 			
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/5mbimage.jpg");
+		driver.findElement(By.id("fileInput1")).sendKeys("/home/Images/comic/5mbimage.jpg");
 						
 		robot.setAutoDelay(100);
 		String actual_msg21 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
@@ -1161,7 +1161,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(1000);
 		
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic10.jpg");
+		driver.findElement(By.id("fileInput1")).sendKeys("/home/Images/comic/Comic10.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -1220,7 +1220,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 		
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic10.jpg");
+		driver.findElement(By.name("Select_Img_btn")).sendKeys("/home/Images/comic/Comic10.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
