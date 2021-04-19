@@ -1648,6 +1648,8 @@ public class LoginToAppmaker {
 	@Test(priority = 14 ) // (priority=5)
 	public void AddNew_Question_Page() throws Exception {
 	
+		System.out.println("---------------------------------------Going to add Question page--------------------------");
+		
 		driver.findElement(By.name("Create_page_btn")).click();
 		System.out.println("----Create_page_btn clicked---->>");
 		Thread.sleep(2000);
@@ -1999,6 +2001,8 @@ public class LoginToAppmaker {
 		}
 
 		Thread.sleep(4000);
+		System.out.println("--------------------------------------- Question page added--------------------------");
+
 		
 	}
 	
@@ -2006,7 +2010,8 @@ public class LoginToAppmaker {
 	@Test(priority = 15 ) // (priority=5)
 	public void AddNew_Question_Page_With_next_Button() throws Exception {
 		
-		
+		System.out.println("---------------------------------------Going to add Question page with next button--------------------------");
+
 		driver.findElement(By.name("Create_page_btn")).click();
 		System.out.println("----Create_page_btn clicked---->>");
 		Thread.sleep(2000);
@@ -2354,11 +2359,15 @@ public class LoginToAppmaker {
 
 		Thread.sleep(4000);
 		
+		System.out.println("--------------------------------------- Question page with next button Added--------------------------");
+
 	}
 	
 	@Test(priority = 16 ) // (priority=5)
 	public void Edit_Question_Page() throws Exception {
 		
+		System.out.println("---------------------------------------Going to edit Question page--------------------------");
+
 		
 		List<WebElement> b1 = driver.findElements(By.name("edit_article"));
 		b1.get(2).click();
@@ -2410,7 +2419,8 @@ public class LoginToAppmaker {
 		}
 
 		Thread.sleep(4000);
-		
+		System.out.println("---------------------------------------edit Question page done--------------------------");
+
 	}
 	
 
@@ -2485,27 +2495,7 @@ public class LoginToAppmaker {
 			System.out.println("Test Case Failed = " + actual_msg15);
 		}
 		
-		driver.findElement(By.name("chk_videoUrl2")).click();
-		System.out.println("------ Youtub video checkbox ticked---->>");
-		Thread.sleep(2000);
-
-		driver.findElement(By.name("videoUrl3")).sendKeys("https://www.youtube.com/watch?v=XAh2FujZ-0g");
-		System.out.println("------Youtube video url entered---->>");
-		Thread.sleep(2000);
-		
-		driver.findElement(By.name("update_btn")).click();
-		System.out.println("------Update button clicked---->>");
-		Thread.sleep(2000);
-
-		String actual_msg4 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
-		String expect4 = "Your article has successfully been published ";
-
-		if (actual_msg4.contains(expect4)) {
-			System.out.println("Validation passed = " + actual_msg4);
-		} else {
-			System.out.println("Test Case Failed = " + actual_msg4);
-		}
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 	
 		System.out.println("---------------------------------------Page edited--------------------------");
 
