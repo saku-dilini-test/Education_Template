@@ -2482,7 +2482,7 @@ public class LoginToAppmaker {
 		driver.findElement(By.name("Crop_&_Save_btn")).click();
 		System.out.println("------Crop & Save button clicked---->>");
 
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 
 		// Catch validation message
 
