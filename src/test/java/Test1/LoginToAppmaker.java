@@ -1118,8 +1118,7 @@ public class LoginToAppmaker {
 		 Thread.sleep(2000);
 		 
 		 System.out.println("----EXPIRY DATE AND TIME Entered---->>");
-		 Thread.sleep(2000);
-		 
+		 Thread.sleep(4000);
 
 		// Image uploading
 
@@ -1133,7 +1132,7 @@ public class LoginToAppmaker {
 			
 		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/5mbimage.jpg");
 						
-		robot.setAutoDelay(100);
+		robot.setAutoDelay(1000);
 		String actual_msg21 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
 
 		robot.setAutoDelay(2000);
@@ -1193,7 +1192,7 @@ public class LoginToAppmaker {
 		driver.findElement(By.name("Crop_&_Save_btn")).click();
 		System.out.println("------Crop & Save button clicked---->>");
 
-		Thread.sleep(4000);
+		Thread.sleep(1000);
 
 // Catch validation message
 
@@ -1252,7 +1251,7 @@ public class LoginToAppmaker {
 		driver.findElement(By.name("Crop_&_Save_btn")).click();
 		System.out.println("------Crop & Save button clicked---->>");
 
-		Thread.sleep(4000);
+		Thread.sleep(1000);
 
 		// Catch validation message
 
@@ -1371,14 +1370,14 @@ public class LoginToAppmaker {
 		{ 
 			driver.findElement(By.cssSelector(".dtpIcon:nth-child(1) use")).click();
 			 
-			 Thread.sleep(300);
+			 Thread.sleep(3000);
 			 
 		} 
 		for (int i = 0; i < 15; i++) 
 		{
 			 driver.findElement(By.cssSelector(".dtpIcon:nth-child(3) use")).click();
 			 
-			 Thread.sleep(300);
+			 Thread.sleep(3000);
 			 
 		}
 			 
@@ -1457,7 +1456,7 @@ public class LoginToAppmaker {
 		driver.findElement(By.name("Crop_&_Save_btn")).click();
 		System.out.println("------Crop & Save button clicked---->>");
 
-		Thread.sleep(4000);
+		Thread.sleep(1000);
 
 // Catch validation message
 
@@ -1509,7 +1508,7 @@ public class LoginToAppmaker {
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
 
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		
 // From below code Video is added for the page description ----------------------------------------------------------------------------------
 	
