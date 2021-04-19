@@ -1205,64 +1205,6 @@ public class LoginToAppmaker {
 			System.out.println("Test Case Failed = " + actual_msg1);
 		}
 
-		Thread.sleep(5000);
-
-		driver.findElement(By.name("chk_videoUrl1")).click();
-		Thread.sleep(2000);
-		System.out.println("------ Youtub video checkbox ticked---->>");
-
-		driver.findElement(By.cssSelector("#videoUrl2")).sendKeys("https://www.youtube.com/watch?v=XAh2FujZ-0g");
-		Thread.sleep(2000);
-		System.out.println("------Youtube video url entered---->>");
-		
-		JavascriptExecutor js2 = (JavascriptExecutor) driver;
-		js2.executeScript("arguments[0].click();", driver.findElement(By.name("Select_Img_btn")));
-
-		robot.setAutoDelay(2000);
-		
-		driver.findElement(By.name("Select_Img_btn")).sendKeys("/home/Images/comic/Comic10.jpg");
-
-		robot.setAutoDelay(2000);
-		System.out.println("----Browse Image button clicked and image uploaded---->>");
-
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).clickAndHold().perform();
-
-		}
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).perform();
-
-		}
-		{
-			WebElement element = driver.findElement(By.cssSelector(".upper-canvas"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).release().perform();
-
-		}
-		System.out.println("------Image croped---->>");
-
-		Thread.sleep(2000);
-
-		driver.findElement(By.cssSelector(".upper-canvas")).click();
-		driver.findElement(By.name("Crop_&_Save_btn")).click();
-		System.out.println("------Crop & Save button clicked---->>");
-
-		Thread.sleep(1000);
-
-		// Catch validation message
-
-		String actual_msg3 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
-		String expect3 = "Image has been uploaded successfully";
-
-		if (actual_msg1.contains(expect3)) {
-			System.out.println("Validation passed = " + actual_msg3);
-		} else {
-			System.out.println("Test Case Failed = " + actual_msg3);
-		}
 		Thread.sleep(9000);
 		
 		
@@ -1425,7 +1367,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic11.jpg");
+		driver.findElement(By.id("fileInput1")).sendKeys("/home/Images/comic/Comic11.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -1723,7 +1665,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic18.jpg");
+		driver.findElement(By.id("fileInput1")).sendKeys("/home/Images/comic/Comic18.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -2082,7 +2024,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic7.jpg");
+		driver.findElement(By.id("fileInput1")).sendKeys("/home/Images/comic/Comic7.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -2254,7 +2196,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic11.jpg");
+		driver.findElement(By.id("fileInputQuestion0")).sendKeys("/home/Images/comic/Comic11.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
