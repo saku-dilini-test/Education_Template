@@ -1125,14 +1125,14 @@ public class LoginToAppmaker {
 		Robot robot = new Robot();
 		
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
-		js1.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput")));
+		js1.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput1")));
 		robot.setAutoDelay(1000);
 
 //Below code is for capturing image validation part, image should be less than 5 mb--------------------------------------------
 			
 		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/5mbimage.jpg");
 						
-		robot.setAutoDelay(1000);
+		robot.setAutoDelay(100);
 		String actual_msg21 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
 
 		robot.setAutoDelay(2000);
@@ -1157,7 +1157,7 @@ public class LoginToAppmaker {
 		Thread.sleep(2000);
 
 		JavascriptExecutor js14 = (JavascriptExecutor) driver;
-		js14.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput")));
+		js14.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput1")));
 
 		robot.setAutoDelay(1000);
 		
@@ -1301,7 +1301,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 		
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic6.jpg");
+		driver.findElement(By.className("ql-image")).sendKeys("/home/Images/comic/Comic6.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -1503,7 +1503,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic13.jpg");
+		driver.findElement(By.className("ql-image")).sendKeys("/home/Images/comic/Comic13.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -1582,11 +1582,11 @@ public class LoginToAppmaker {
 		Robot robot = new Robot();
 
 		JavascriptExecutor js8 = (JavascriptExecutor) driver;
-		js8.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput")));
+		js8.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput1")));
 
 		robot.setAutoDelay(2000);
 		
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic10.jpg");
+		driver.findElement(By.id("fileInput1")).sendKeys("/home/Images/comic/Comic10.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -1617,7 +1617,7 @@ public class LoginToAppmaker {
 		driver.findElement(By.name("Crop_&_Save_btn")).click();
 		System.out.println("------Crop & Save button clicked---->>");
 
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 
 		// Catch validation message
 
@@ -1801,7 +1801,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic4.jpg");
+		driver.findElement(By.className("ql-image")).sendKeys("/home/Images/comic/Comic4.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -2160,7 +2160,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic9.jpg");
+		driver.findElement(By.className("ql-image")).sendKeys("/home/Images/comic/Comic9.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -2297,7 +2297,7 @@ public class LoginToAppmaker {
 
 		robot.setAutoDelay(2000);
 
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic15.jpg");
+		driver.findElement(By.id("fileInputQuestion1")).sendKeys("/home/Images/comic/Comic15.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
@@ -2493,13 +2493,13 @@ public class LoginToAppmaker {
 		Thread.sleep(2000);
 		
 		JavascriptExecutor js8 = (JavascriptExecutor) driver;
-		js8.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput")));
+		js8.executeScript("arguments[0].click();", driver.findElement(By.id("fileInput1")));
 		
 		Robot robot = new Robot();
 
 		robot.setAutoDelay(2000);
 		
-		driver.findElement(By.id("fileInput")).sendKeys("/home/Images/comic/Comic1.jpg");
+		driver.findElement(By.id("fileInput1")).sendKeys("/home/Images/comic/Comic1.jpg");
 
 		robot.setAutoDelay(2000);
 		System.out.println("----Browse Image button clicked and image uploaded---->>");
