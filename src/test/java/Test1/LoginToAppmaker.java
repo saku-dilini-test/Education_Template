@@ -2496,6 +2496,19 @@ public class LoginToAppmaker {
 		}
 		
 		Thread.sleep(4000);
+		
+		driver.findElement(By.name("update_btn")).click();
+		System.out.println("------update button clicked---->>");
+		Thread.sleep(4000);
+		
+		String actual_msg2 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
+		String expect2 = "Your article has successfully been published ";
+
+		if (actual_msg2.contains(expect2)) {
+			System.out.println("Validation passed = " + actual_msg2);
+		} else {
+			System.out.println("Test Case Failed = " + actual_msg2);
+		}
 	
 		System.out.println("---------------------------------------Page edited--------------------------");
 
