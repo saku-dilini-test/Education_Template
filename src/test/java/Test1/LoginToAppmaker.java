@@ -256,6 +256,10 @@ public class LoginToAppmaker {
 		System.out.println("Get Started button clicked");
 		Thread.sleep(7000);
 		
+		driver.findElement(By.cssSelector(".me-default-button:nth-child(2) > .ng-scope")).click();
+		System.out.println("Please note that app name cannot be changed after this step. Confirm to proceed with the current app name - Confirm clicked");
+		Thread.sleep(5000);
+		
 		WebElement element1 = driver.findElement(By.name("yes_btn"));
 		JavascriptExecutor executor1 = (JavascriptExecutor)driver;
 		executor1.executeScript("arguments[0].click();", element1); 
