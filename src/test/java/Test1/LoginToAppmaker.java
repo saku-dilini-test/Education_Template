@@ -3629,7 +3629,7 @@ public class LoginToAppmaker {
 
 			List<WebElement> activeColumns = driver.findElements(By.name("Created_Apps"));
 			Thread.sleep(1000);
-			activeColumns.get(activeColumns.size() - 1).click();
+			activeColumns.get(activeColumns.size() - 2).click();
 			Thread.sleep(10000);
 			
 			driver.findElement(By.name("publish_btn")).click();
@@ -3792,7 +3792,7 @@ public class LoginToAppmaker {
 
 			List<WebElement> activeColumns = driver.findElements(By.name("Created_Apps"));
 			Thread.sleep(1000);
-			activeColumns.get(activeColumns.size() - 1).click();
+			activeColumns.get(activeColumns.size() - 2).click();
 			Thread.sleep(4000);
 			
 			driver.findElement(By.name("publish_btn")).click();
