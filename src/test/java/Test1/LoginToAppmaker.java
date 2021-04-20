@@ -1989,7 +1989,7 @@ public class LoginToAppmaker {
 		
 		driver.findElement(By.className("automation-create-page-btn-publish")).click();
 		System.out.println("------Publish button clicked---->>");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		String actual_msg2 = driver.findElement(By.xpath("//*[@id=\"toast-container\"]/div/div/div[2]")).getAttribute("innerHTML");
 		String expect2 = "Your article has successfully been published ";
